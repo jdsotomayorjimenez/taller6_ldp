@@ -13,8 +13,9 @@ class ProyectosController extends Controller
      */
     public function index()
     {
-        $proyectos=DB::table('proyectos')->get();
-        return view("projects.index", ['proyectos'=>$proyectos]);
+        $proyectos = DB::table('proyectos')->get();
+
+        return view("projects.index", ['proyectos' => $proyectos]);
     }
 
     /**
@@ -22,7 +23,7 @@ class ProyectosController extends Controller
      */
     public function create()
     {
-        //
+        return view("projects.new");
     }
 
     /**
@@ -30,7 +31,15 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required',
+        ]);
+
+        Proyectos::create($request->all());
+
+        return redirect('projects/')
+            ->with('success', 'Proyecto creado satisfactoriamente.');
     }
 
     /**
@@ -46,7 +55,9 @@ class ProyectosController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $proyecto = Proyectos::findOrFail($id);
+
+        return view("projects.update", compact('proyecto'));
     }
 
     /**
@@ -54,7 +65,17 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required',
+        ]);
+
+        $proyecto = Proyectos::findOrFail($id);
+
+        $proyecto->update($request->all());
+
+        return redirect('projects/')
+            ->with('success', 'Proyecto actualizado satisfactoriamente.');
     }
 
     /**
