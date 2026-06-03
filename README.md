@@ -416,34 +416,6 @@ Los cambios se verificaron tanto en la ruta `/projects` como en phpMyAdmin.
 
 ---
 
-## Comandos usados
-
-Para ejecutar migraciones:
-
-```bash
-php artisan migrate
-```
-
-Para levantar el servidor local:
-
-```bash
-php artisan serve
-```
-
-Para revisar las rutas registradas:
-
-```bash
-php artisan route:list
-```
-
-Si se necesita limpiar la configuración cacheada:
-
-```bash
-php artisan config:clear
-php artisan cache:clear
-```
-
----
 
 ## Ejecución del proyecto
 
