@@ -14,6 +14,10 @@
     <div class="container mt-4">
         <h1>Proyectos</h1>
 
+        <a href="{{ url('projects/create') }}" class="btn btn-primary mt-3" role="button">
+            Nuevo
+        </a>
+
         <table class="table table-bordered table-striped mt-3">
             <thead>
                 <tr>
@@ -21,6 +25,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Fecha de creación</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
 
@@ -31,6 +36,20 @@
                         <td>{{ $proyecto->nombre }}</td>
                         <td>{{ $proyecto->descripcion }}</td>
                         <td>{{ $proyecto->created_at }}</td>
+                        <td>
+                            <a href="{{ route('projects.edit', $proyecto->id) }}" class="btn btn-secondary btn-sm">
+                                Editar
+                            </a>
+
+                            <form action="{{ route('projects.destroy', $proyecto->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
